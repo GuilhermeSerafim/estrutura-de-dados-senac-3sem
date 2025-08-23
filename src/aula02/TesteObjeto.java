@@ -10,8 +10,8 @@ public class TesteObjeto {
         vObj.adiciona(c1);
         vObj.adiciona(c2);
         vObj.adiciona(c3);
+        vObj.remove(0);
         
-        System.out.println("Quantidade de dados do vetor: " + vObj.qtdItensPreenchido());
         System.out.println("Dados do Vetor: " + vObj.toString());
     }
 }
