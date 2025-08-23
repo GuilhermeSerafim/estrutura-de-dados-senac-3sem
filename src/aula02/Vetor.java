@@ -1,4 +1,4 @@
-package aula01;
+package aula02;
 
 
 public class Vetor {
@@ -41,6 +41,18 @@ public class Vetor {
         s.append("]");
 
         return s.toString();
+    }
+
+    public void remove(int posicao) throws Exception {
+        if (posicao >= 0 && posicao < tamanho) {
+            for (int i = posicao; i < this.tamanho - 1; i++) {
+                this.elementos[i] = this.elementos[i + 1];
+            }
+            this.elementos[tamanho] = null;
+            this.tamanho--;
+        } else {
+            throw new Exception("Posição Inválida");
+        }
     }
 
 }
