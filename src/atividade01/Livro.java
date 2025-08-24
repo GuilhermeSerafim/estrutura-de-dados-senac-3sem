@@ -3,10 +3,10 @@ package atividade01;
 import atividade01.enums.Tema;
 
 public class Livro {
+    private Tema tema;
     private int id; // Gerado pela biblioteca
     private String titulo;
     private String autor;
-    private Tema tema;
     private boolean lido;
 
     public Livro(String titulo, String autor, Tema tema) {
@@ -58,7 +58,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", tema=" + tema + ", lido=" + lido
+        return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", tema=" + tema.getDescricao() + ", lido=" + lido
                 + "]";
     }
     

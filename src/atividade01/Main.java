@@ -1,72 +1,36 @@
 package atividade01;
 
+import atividade01.enums.Tema;
+
 public class Main {
     public static void main(String[] args) {
         try {
-            Vetor v = new Vetor(5); // capacidade 5
 
-            print("Inicial (espera vazio)", v);
+            Biblioteca bib = new Biblioteca(3);
 
-            // adiciona 3 itens
-            v.adiciona("A");
-            v.adiciona("B");
-            v.adiciona("C");
-            print("Após adicionar A, B, C", v); // [A, B, C]
+            System.out.println("Cheia? " + bib.isCheia() + " | Vazia? " + bib.isVazia());
 
-            // remove do meio (pos 1 -> "B")
-            v.remove(1);
-            print("Após remover pos 1 (B)", v); // [A, C]
+            bib.adicionarLivro(new Livro("Cosmos", "Carl Sagan", Tema.ASTRONOMIA));
+            bib.adicionarLivro(new Livro("Vreves Respostas para Grandes Questões", "Stephen Hawking", Tema.COSMOLOGIA));
+            bib.adicionarLivro(new Livro("Rápido e Devagar", "Daniel Kahneman", Tema.NEUROCIENCIA));
 
-            // adiciona mais 2 itens
-            v.adiciona("D");
-            v.adiciona("E");
-            print("Após adicionar D, E", v); // [A, C, D, E]
+            bib.listarLivros();
+            System.out.println("Tamanho: " + bib.getQtdItensPreenchido() + "/" + bib.capacidade());
 
-            // remove do início (pos 0 -> "A")
-            v.remove(0);
-            print("Após remover pos 0 (A)", v); // [C, D, E]
+            bib.alterarLivro(2, "Uma Breve História do ", null, Tema.COSMOLOGIA, null);
+            System.out.println("\nApós alterar id=2:");
+            bib.listarLivros();
 
-            // remove do fim (pos = tamanho-1)
-            v.remove(v.tamanho() - 1); // remove "E"
-            print("Após remover último (E)", v); // [C, D]
-
-            // testa get
-            Object primeiro = v.get(0); // deve ser "C"
-            System.out.println("get(0) = " + primeiro);
-
-            // testa exceção: remover posição inválida
-            try {
-                v.remove(10); // inválida
-            } catch (Exception e) {
-                System.out.println("Remoção inválida OK -> " + e.getMessage());
-            }
-
-            // preenche até lotar
-            v.adiciona("W");
-            v.adiciona("X");
-            v.adiciona("Y");
-            print("Após preencher até a capacidade", v);
-
-            // tenta adicionar além do limite
-            try {
-                v.adiciona("Z"); // estoura capacidade
-            } catch (Exception e) {
-                System.out.println("Capacidade atingida OK -> " + e.getMessage());
-            }
-
-            // status final
-            System.out.println("Tamanho: " + v.tamanho());
-            System.out.println("Está vazio? " + v.isEmpty());
+            boolean ok = bib.adicionarLivro(new Livro("O Universo Numa Casca de Noz", "Hawking", Tema.COSMOLOGIA));
+            System.out.println("\nTentar incluir mais um (deve falhar): " + ok);
+            bib.listarLivros();
+            
+            bib.removerLivro(1);
+            System.out.println("\nApós remover id=1:");
+            bib.listarLivros();
 
         } catch (Exception e) {
-            // qualquer erro inesperado nos testes
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-    }
-
-    private static void print(String titulo, Vetor v) {
-        System.out.println("\n=== " + titulo + " ===");
-        System.out.println(v.toString());
-        System.out.println("tamanho=" + v.tamanho() + " | vazio=" + v.isEmpty());
     }
 }

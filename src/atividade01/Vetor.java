@@ -12,10 +12,6 @@ public class Vetor {
     }
 
     // Consultas básicas
-    public int tamanho() {
-        return qtdItensPreenchido;
-    }
-
     public boolean isEmpty() {
         return qtdItensPreenchido == 0;
     }
