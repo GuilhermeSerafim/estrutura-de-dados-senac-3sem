@@ -84,15 +84,19 @@ public class Main {
         System.out.println(ok ? "✔ Alterado." : "✘ Não foi possível alterar.");
     }
 
+    private static void removerLivro(Scanner in, Biblioteca bib) {
+        System.out.println("\n --- Remover Livro ---");
+        int id = lerInt(in, "ID ");
+        boolean ok = bib.removerLivro(id);
+        System.out.println(ok ? "✔ Removido." : "✘ ID não encontrado.");
+    }
+    
+    // Utils
     private static Tema lerTemaOpcional(Scanner in) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'lerTemaOpcional'");
     }
 
-    private static Object removerLivro(Scanner in, Biblioteca bib) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removerLivro'");
-    }
 
     private static int letInt(Scanner in, String string) {
         // TODO Auto-generated method stub
@@ -104,8 +108,7 @@ public class Main {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'mostrarMenu'");
     }
-
-    // Utils
+    
     private static Tema lerTema(Scanner in) {
         while (true) {
             System.out.println("tema:");
