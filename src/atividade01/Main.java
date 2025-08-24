@@ -1,36 +1,62 @@
 package atividade01;
 
-import atividade01.enums.Tema;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Biblioteca bib = new Biblioteca(100);
+        int opcao;
         try {
 
-            Biblioteca bib = new Biblioteca(3);
-
-            System.out.println("Cheia? " + bib.isCheia() + " | Vazia? " + bib.isVazia());
-
-            bib.adicionarLivro(new Livro("Cosmos", "Carl Sagan", Tema.ASTRONOMIA));
-            bib.adicionarLivro(new Livro("Vreves Respostas para Grandes Questões", "Stephen Hawking", Tema.COSMOLOGIA));
-            bib.adicionarLivro(new Livro("Rápido e Devagar", "Daniel Kahneman", Tema.NEUROCIENCIA));
-
-            bib.listarLivros();
-            System.out.println("Tamanho: " + bib.getQtdItensPreenchido() + "/" + bib.capacidade());
-
-            bib.alterarLivro(2, "Uma Breve História do ", null, Tema.COSMOLOGIA, null);
-            System.out.println("\nApós alterar id=2:");
-            bib.listarLivros();
-
-            boolean ok = bib.adicionarLivro(new Livro("O Universo Numa Casca de Noz", "Hawking", Tema.COSMOLOGIA));
-            System.out.println("\nTentar incluir mais um (deve falhar): " + ok);
-            bib.listarLivros();
-            
-            bib.removerLivro(1);
-            System.out.println("\nApós remover id=1:");
-            bib.listarLivros();
-
+            do {
+                mostrarMenu();
+                opcao = letInt(in, "Opção: ");
+                switch (opcao) {
+                    case 1 -> incluirLivro(in, bib);
+                    case 2 -> pesquisarPorId(in, bib);
+                    case 3 -> alterarLivro(in, bib);
+                    case 4 -> removerLivro(in, bib);
+                    case 5 -> bib.listarLivros();
+                    case 0 -> System.out.println("Até mais, Astro! 🌌");
+                    default -> System.out.println("Opção inválida.");
+                }
+                System.out.println();
+            } while (opcao != 0);
+            in.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private static Object removerLivro(Scanner in, Biblioteca bib) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removerLivro'");
+    }
+
+    private static Object alterarLivro(Scanner in, Biblioteca bib) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'alterarLivro'");
+    }
+
+    private static Object pesquisarPorId(Scanner in, Biblioteca bib) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'pesquisarPorId'");
+    }
+
+    private static int letInt(Scanner in, String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'letInt'");
+    }
+
+    private static void incluirLivro(Scanner in, Biblioteca bib) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'incluirLivro'");
+    }
+
+    private static void mostrarMenu() {
+
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mostrarMenu'");
     }
 }
