@@ -13,7 +13,7 @@ public class Main {
 
             do {
                 mostrarMenu();
-                opcao = letInt(in, "Opção: ");
+                opcao = lerInt(in, "Opção: ");
                 switch (opcao) {
                     case 1 -> incluirLivro(in, bib);
                     case 2 -> pesquisarPorId(in, bib);
@@ -80,7 +80,7 @@ public class Main {
         Boolean lido = s.equals("s") ? Boolean.TRUE : s.equals("n") ? Boolean.FALSE : null;
 
         boolean ok = bib.alterarLivro(id, novoTitulo, novoAutor, novoTema, lido);
-        
+
         System.out.println(ok ? "✔ Alterado." : "✘ Não foi possível alterar.");
     }
 
@@ -90,25 +90,18 @@ public class Main {
         boolean ok = bib.removerLivro(id);
         System.out.println(ok ? "✔ Removido." : "✘ ID não encontrado.");
     }
-    
+
     // Utils
-    private static Tema lerTemaOpcional(Scanner in) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'lerTemaOpcional'");
-    }
-
-
-    private static int letInt(Scanner in, String string) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'letInt'");
-    }
-
     private static void mostrarMenu() {
-
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mostrarMenu'");
+        System.out.println("=== LibAstros (Array + Vetor) ===");
+        System.out.println("1) Incluir livro");
+        System.out.println("2) Pesquisar por ID");
+        System.out.println("3) Alterar livro");
+        System.out.println("4) Remover livro");
+        System.out.println("5) Listar livros");
+        System.out.println("0) Sair");
     }
-    
+
     private static Tema lerTema(Scanner in) {
         while (true) {
             System.out.println("tema:");
@@ -118,6 +111,22 @@ public class Main {
             if (t != null)
                 return t;
             System.out.println("Opção de tema inválida.\n");
+        }
+    }
+
+    private static Tema lerTemaOpcional(Scanner in) {
+        System.out.println("Temas disponíveis (ou enter p/ manter):");
+        imprimirTemasNumerados();
+        System.out.println("Escolha (número ou enter): ");
+        String s = in.nextLine().trim();
+        if (s.isBlank())
+            return null;
+        try {
+            int n = Integer.parseInt(s);
+            return temaPorIndice(n);
+        } catch (Exception e) {
+            System.out.println("Entrada inválida. Mantendo tema atual.");
+            return null;
         }
     }
 
@@ -133,17 +142,17 @@ public class Main {
         }
     }
 
-    private static Tema temaPorIndice(int n) {
-        Tema[] valores = Tema.values();
-        if (n >= 1 && n <= valores.length)
-            return valores[n - 1];
-        return null;
-    }
-
     private static void imprimirTemasNumerados() {
         Tema[] valores = Tema.values();
         for (int i = 0; i < valores.length; i++) {
             System.out.printf("%d) %s%n", i + 1, valores[i].getDescricao());
         }
+    }
+
+    private static Tema temaPorIndice(int n) {
+        Tema[] valores = Tema.values();
+        if (n >= 1 && n <= valores.length)
+            return valores[n - 1];
+        return null;
     }
 }
