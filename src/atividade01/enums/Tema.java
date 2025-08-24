@@ -7,7 +7,8 @@ public enum Tema {
     TECNOLOGIA("Tecnologia"),
     FISICA_QUANTICA("Física Quântica"),
     MATERIA_ESCURA("Matéria Escura"),
-    PRODUTIVIDADE("Produtividade");
+    PRODUTIVIDADE("Produtividade"),
+    OUTRO("Outro");
 
     private final String descricao;
 

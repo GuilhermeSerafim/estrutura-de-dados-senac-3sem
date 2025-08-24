@@ -76,7 +76,7 @@ public class Biblioteca {
     }
 
     // Read por título
-    public Livro buscarPrimeiroPorTitulo(String termo) throws Exception {
+    public Livro buscarPrimeiroPorTitulo(String termo) {
         if (termo == null || termo.isBlank())
             return null;
         String alvo = termo.toLowerCase();

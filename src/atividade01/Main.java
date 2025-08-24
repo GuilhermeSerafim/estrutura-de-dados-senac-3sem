@@ -1,43 +1,44 @@
 package atividade01;
 
 import java.util.Scanner;
-
 import atividade01.enums.Tema;
 
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Biblioteca bib = new Biblioteca(100);
+        Biblioteca bib = new Biblioteca(5);
         int opcao;
-        try {
 
+        try {
             do {
                 mostrarMenu();
                 opcao = lerInt(in, "Opção: ");
                 switch (opcao) {
                     case 1 -> incluirLivro(in, bib);
                     case 2 -> pesquisarPorId(in, bib);
-                    case 3 -> alterarLivro(in, bib);
-                    case 4 -> removerLivro(in, bib);
-                    case 5 -> bib.listarLivros();
+                    case 3 -> pesquisarPorTitulo(in, bib);
+                    case 4 -> alterarLivro(in, bib);
+                    case 5 -> removerLivro(in, bib);
+                    case 6 -> bib.listarLivros();
                     case 0 -> System.out.println("Até mais, Astro! 🌌");
                     default -> System.out.println("Opção inválida.");
                 }
                 System.out.println();
             } while (opcao != 0);
-            in.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            in.close();
         }
     }
 
     // Ações
     private static void incluirLivro(Scanner in, Biblioteca bib) {
         System.out.println("\n--- Incluir Livro ---");
-        System.out.println("Título: ");
+        System.out.print("Título: ");
         String titulo = in.nextLine().trim();
 
-        System.out.println("Autor: ");
+        System.out.print("Autor: ");
         String autor = in.nextLine().trim();
 
         Tema tema = lerTema(in);
@@ -47,14 +48,25 @@ public class Main {
     }
 
     private static void pesquisarPorId(Scanner in, Biblioteca bib) {
-        System.out.println("\n --- Pesquisar por ID ---");
+        System.out.println("\n--- Pesquisar por ID ---");
         int id = lerInt(in, "ID: ");
         Livro l = bib.buscarPorId(id);
         System.out.println(l != null ? l : "Não encontrado.");
     }
 
+    private static void pesquisarPorTitulo(Scanner in, Biblioteca bib) {
+        System.out.println("\n --- Pesquisar por título ---");
+        String titulo = in.nextLine().trim();
+        if (titulo.isBlank()) {
+            System.out.println("Digite um título válido");
+            return;
+        }
+        Livro l = bib.buscarPrimeiroPorTitulo(titulo);
+        System.out.println(l != null ? l : "Não encontrado");
+    }
+
     private static void alterarLivro(Scanner in, Biblioteca bib) {
-        System.out.println("\n --- Alterar Livro ---");
+        System.out.println("\n--- Alterar Livro ---");
         int id = lerInt(in, "ID: ");
         Livro atual = bib.buscarPorId(id);
         if (atual == null) {
@@ -62,6 +74,7 @@ public class Main {
             return;
         }
         System.out.println("Atual: " + atual);
+
         System.out.print("Novo Título (enter p/ manter): ");
         String novoTitulo = in.nextLine().trim();
         if (novoTitulo.isBlank())
@@ -72,39 +85,38 @@ public class Main {
         if (novoAutor.isBlank())
             novoAutor = null;
 
-        System.out.print("Novo Tema (enter p/ manter): ");
-        Tema novoTema = lerTemaOpcional(in); // Pode retornar null
+        Tema novoTema = lerTemaOpcional(in); // pode voltar null
 
-        System.out.print("Marcar como lido? (s = lido, n = não lido, enter = manter: )");
+        System.out.print("Marcar como lido? (s = lido, n = não lido, enter = manter): ");
         String s = in.nextLine().trim().toLowerCase();
         Boolean lido = s.equals("s") ? Boolean.TRUE : s.equals("n") ? Boolean.FALSE : null;
 
         boolean ok = bib.alterarLivro(id, novoTitulo, novoAutor, novoTema, lido);
-
         System.out.println(ok ? "✔ Alterado." : "✘ Não foi possível alterar.");
     }
 
     private static void removerLivro(Scanner in, Biblioteca bib) {
-        System.out.println("\n --- Remover Livro ---");
-        int id = lerInt(in, "ID ");
+        System.out.println("\n--- Remover Livro ---");
+        int id = lerInt(in, "ID: ");
         boolean ok = bib.removerLivro(id);
         System.out.println(ok ? "✔ Removido." : "✘ ID não encontrado.");
     }
 
     // Utils
     private static void mostrarMenu() {
-        System.out.println("=== LibAstros (Array + Vetor) ===");
+        System.out.println("=== LibAstros ===");
         System.out.println("1) Incluir livro");
-        System.out.println("2) Pesquisar por ID");
-        System.out.println("3) Alterar livro");
-        System.out.println("4) Remover livro");
-        System.out.println("5) Listar livros");
+        System.out.println("2) Pesquisar por id");
+        System.out.println("3) Pesquisar por título");
+        System.out.println("4) Alterar livro");
+        System.out.println("5) Remover livro");
+        System.out.println("6) Listar livros");
         System.out.println("0) Sair");
     }
 
     private static Tema lerTema(Scanner in) {
         while (true) {
-            System.out.println("tema:");
+            System.out.println("Temas disponíveis:");
             imprimirTemasNumerados();
             int n = lerInt(in, "Escolha (número): ");
             Tema t = temaPorIndice(n);
@@ -117,7 +129,7 @@ public class Main {
     private static Tema lerTemaOpcional(Scanner in) {
         System.out.println("Temas disponíveis (ou enter p/ manter):");
         imprimirTemasNumerados();
-        System.out.println("Escolha (número ou enter): ");
+        System.out.print("Escolha (número ou enter): ");
         String s = in.nextLine().trim();
         if (s.isBlank())
             return null;
@@ -133,7 +145,7 @@ public class Main {
     private static int lerInt(Scanner in, String prompt) {
         while (true) {
             try {
-                System.out.println(prompt);
+                System.out.print(prompt);
                 String s = in.nextLine().trim();
                 return Integer.parseInt(s);
             } catch (NumberFormatException e) {
