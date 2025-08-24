@@ -68,7 +68,7 @@ public class Biblioteca {
     }
 
     // Read por id
-    public Livro buscarPorId(int id) throws Exception {
+    public Livro buscarPorId(int id) {
         int idx = indicePorId(id);
         if (idx == -1)
             return null;
@@ -91,25 +91,21 @@ public class Biblioteca {
 
     // Update
     public boolean alterarLivro(int id, String novoTitulo, String novoAutor, Tema novoTema, Boolean lido) {
-        try {
-            int idx = indicePorId(id);
-            if (idx == -1)
-                return false;
-            Livro alvo = (Livro) acervo.get(idx);
-
-            if (novoTitulo != null && !novoTitulo.isBlank())
-                alvo.setTitulo(novoTitulo);
-            if (novoAutor != null && !novoAutor.isBlank())
-                alvo.setAutor(novoAutor);
-            if (novoTema != null)
-                alvo.setTema(novoTema);
-            if (lido != null)
-                alvo.setLido(lido);
-
-            return true;
-        } catch (Exception e) {
+        int idx = indicePorId(id);
+        if (idx == -1)
             return false;
-        }
+        Livro alvo = (Livro) acervo.get(idx);
+
+        if (novoTitulo != null && !novoTitulo.isBlank())
+            alvo.setTitulo(novoTitulo);
+        if (novoAutor != null && !novoAutor.isBlank())
+            alvo.setAutor(novoAutor);
+        if (novoTema != null)
+            alvo.setTema(novoTema);
+        if (lido != null)
+            alvo.setLido(lido);
+
+        return true;
     }
 
     // Delete por id
@@ -130,13 +126,9 @@ public class Biblioteca {
     private int indicePorId(int id) {
         int n = acervo.getQtdItensPreenchido();
         for (int i = 0; i < n; i++) {
-            try {
-                Livro l = (Livro) acervo.get(i);
-                if (l.getId() == id)
-                    return i;
-            } catch (Exception e) {
-                return -1;
-            }
+            Livro l = (Livro) acervo.get(i);
+            if (l.getId() == id)
+                return i;
         }
         return -1;
     }

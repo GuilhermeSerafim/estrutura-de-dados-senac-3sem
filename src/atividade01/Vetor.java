@@ -32,9 +32,15 @@ public class Vetor {
         }
     }
 
-    public Object get(int posicao) throws Exception {
+    /**
+     * Retorna o elemento armazenado na posição indicada.
+     *
+     * @param posicao índice do elemento que se deseja obter (de 0 até qtdItensPreenchido - 1)
+     * @return o objeto armazenado nessa posição, ou {@code null} caso a posição seja inválida
+    */
+    public Object get(int posicao) {
         if (posicao < 0 || posicao >= qtdItensPreenchido) {
-            throw new Exception("Posição inválida: " + posicao);
+            return null; // posição inválida
         }
         return elementos[posicao];
     }

@@ -46,6 +46,13 @@ public class Main {
         System.out.println(ok ? "✔ Incluído com sucesso." : "✘ Falha ao incluir (dados inválidos ou acervo cheio).");
     }
 
+    private static void pesquisarPorId(Scanner in, Biblioteca bib) {
+        System.out.println("\n --- Pesquisar por ID ---");
+        int id = lerInt(in, "ID: ");
+        Livro l = bib.buscarPorId(id);
+        System.out.println(l != null ? l : "Não encontrado.");
+    }
+
     private static Object removerLivro(Scanner in, Biblioteca bib) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'removerLivro'");
@@ -54,11 +61,6 @@ public class Main {
     private static Object alterarLivro(Scanner in, Biblioteca bib) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'alterarLivro'");
-    }
-
-    private static Object pesquisarPorId(Scanner in, Biblioteca bib) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pesquisarPorId'");
     }
 
     private static int letInt(Scanner in, String string) {
