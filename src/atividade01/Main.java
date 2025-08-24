@@ -53,14 +53,45 @@ public class Main {
         System.out.println(l != null ? l : "Não encontrado.");
     }
 
+    private static void alterarLivro(Scanner in, Biblioteca bib) {
+        System.out.println("\n --- Alterar Livro ---");
+        int id = lerInt(in, "ID: ");
+        Livro atual = bib.buscarPorId(id);
+        if (atual == null) {
+            System.out.println("ID não encontrado.");
+            return;
+        }
+        System.out.println("Atual: " + atual);
+        System.out.print("Novo Título (enter p/ manter): ");
+        String novoTitulo = in.nextLine().trim();
+        if (novoTitulo.isBlank())
+            novoTitulo = null;
+
+        System.out.print("Novo Autor (enter p/ manter): ");
+        String novoAutor = in.nextLine().trim();
+        if (novoAutor.isBlank())
+            novoAutor = null;
+
+        System.out.print("Novo Tema (enter p/ manter): ");
+        Tema novoTema = lerTemaOpcional(in); // Pode retornar null
+
+        System.out.print("Marcar como lido? (s = lido, n = não lido, enter = manter: )");
+        String s = in.nextLine().trim().toLowerCase();
+        Boolean lido = s.equals("s") ? Boolean.TRUE : s.equals("n") ? Boolean.FALSE : null;
+
+        boolean ok = bib.alterarLivro(id, novoTitulo, novoAutor, novoTema, lido);
+        
+        System.out.println(ok ? "✔ Alterado." : "✘ Não foi possível alterar.");
+    }
+
+    private static Tema lerTemaOpcional(Scanner in) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'lerTemaOpcional'");
+    }
+
     private static Object removerLivro(Scanner in, Biblioteca bib) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'removerLivro'");
-    }
-
-    private static Object alterarLivro(Scanner in, Biblioteca bib) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'alterarLivro'");
     }
 
     private static int letInt(Scanner in, String string) {
