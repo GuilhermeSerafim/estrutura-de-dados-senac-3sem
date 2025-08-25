@@ -1,4 +1,4 @@
-package atividade01;
+package atividade01_biblioteca;
 
 public class Vetor {
     private Object[] elementos;

@@ -1,7 +1,6 @@
-package atividade01;
+package atividade01_biblioteca;
 
 import java.util.Scanner;
-import atividade01.enums.Tema;
 
 public class Main {
     public static void main(String[] args) {

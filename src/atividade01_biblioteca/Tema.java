@@ -1,4 +1,4 @@
-package atividade01.enums;
+package atividade01_biblioteca;
 
 public enum Tema {
     ASTRONOMIA("Astronomia"),

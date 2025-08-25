@@ -1,6 +1,4 @@
-package atividade01;
-
-import atividade01.enums.Tema;
+package atividade01_biblioteca;
 
 public class Biblioteca {
     private Vetor acervo;
