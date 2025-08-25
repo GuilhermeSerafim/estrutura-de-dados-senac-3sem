@@ -143,7 +143,7 @@ public class Main {
         Boolean lido = s.equals("s") ? Boolean.TRUE : s.equals("n") ? Boolean.FALSE : null;
 
         boolean ok = bib.alterarLivro(id, novoTitulo, novoAutor, novoTema, lido);
-        System.out.println(ok ? "✔ Alterado." : "✘ Não foi possível alterar.");
+        System.out.println(ok ? "✔ Processo de alteração finalizado." : "✘ Não foi possível alterar.");
     }
 
     private static void removerLivro(Scanner in, Biblioteca bib) {
