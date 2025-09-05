@@ -34,7 +34,7 @@ public class EstruturaEstatica<T> {
     }
 
     private void aumentaCapacidade() {
-        if(this.tamanho === this.elementos.length) {
+        if(this.tamanho == this.elementos.length) {
             T[] elementosNovos = (T[]) new Object[this.elementos.length * 2];
             for (int i = 0; i < elementos.length; i++) {
                 // Populando array novo com os itens antigos
