@@ -7,8 +7,12 @@ public class TesteFila {
         System.out.println("Fila está vazia? " + fila.estaVazia());
         System.out.println("Qual o tamanho da fila: " + fila.tamanho);
         System.out.println(fila.toString());
-        if(fila.espiar() == null) {
+        if (fila.espiar() == null) {
             System.out.println("Ninguém na fila");
-        } else System.out.println("O elemento da primeira posição na fila é: " + fila.espiar());
+        } else
+            System.out.println("O elemento da primeira posição na fila é: " + fila.espiar());
+
+        fila.desenfileira();
+        System.out.println("Fila após uma desenfileiração (FIFO): " + fila);
     }
 }
