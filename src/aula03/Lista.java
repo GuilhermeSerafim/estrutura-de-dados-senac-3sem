@@ -1,3 +1,5 @@
+package aula03;
+
 public class Lista<T> extends EstruturaEstatica<T> {
     public Lista(int capacidade) {
         super(capacidade);

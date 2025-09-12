@@ -1,3 +1,5 @@
+package aula03;
+
 // FIFO - First In First Out
 public class Fila<T> extends EstruturaEstatica<T> {
     // Boas práticas
