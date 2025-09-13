@@ -11,7 +11,7 @@ public class BubbleSortTime {
         int a;
         for (int i = 0; i < v.length; i++) {
             for (int j = 0; j < v.length - i - 1; j++) {
-                if (v[j] > v[i]) {
+                if (v[i] > v[j + 1]) {
                     a = v[j];
                     v[j] = v[i];
                     v[i] = a;
