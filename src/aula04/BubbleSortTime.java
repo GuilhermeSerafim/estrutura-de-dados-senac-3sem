@@ -2,7 +2,7 @@ package aula04;
 
 public class BubbleSortTime {
     public static void main(String[] args) {
-        int[] v = new int[1000000];
+        int[] v = new int[10000];
         for (int i = 0; i < v.length; i++) {
             v[i] = (int) (Math.random() * v.length);
         }

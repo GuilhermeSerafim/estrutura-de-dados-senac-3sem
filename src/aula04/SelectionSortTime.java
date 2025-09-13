@@ -2,7 +2,7 @@ package aula04;
 
 public class SelectionSortTime {
     public static void main(String[] args) {
-        int[] v = new int[10];
+        int[] v = new int[1000000];
         for (int i = 0; i < v.length; i++) {
             v[i] = (int) (Math.random() * v.length);
         }
