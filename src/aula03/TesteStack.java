@@ -1,7 +1,7 @@
 package aula03;
 import java.util.Stack;
 
-public class Teste {
+public class TesteStack {
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<Integer>();
         System.out.println(stack.isEmpty());
