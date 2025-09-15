@@ -1,6 +1,5 @@
 package aula03;
 
-import java.util.Arrays;
 
 public class EstruturaEstatica<T> {
     public T[] elementos;
