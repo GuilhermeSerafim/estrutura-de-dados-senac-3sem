@@ -49,4 +49,14 @@ public class ListaEncadeada<T> {
         }
         this.tamanho++;
     }
+
+    public NO get(int posicao) {
+        NO atual = this.inicio;
+        for (int i = 0; i < posicao; i++) {
+            if (atual.getProximo() != null) {
+                atual = atual.getProximo();
+            }
+        }
+        return atual;
+    }
 }
