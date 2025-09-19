@@ -10,7 +10,7 @@ public class StaticStructure<T> {
     }
 
     public StaticStructure() {
-        this(10);
+        this(3);
     }
 
     public boolean add(T element) {

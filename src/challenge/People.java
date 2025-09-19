@@ -2,13 +2,23 @@ package challenge;
 
 public class People {
     private int id;
+    private String name;
     private String bloodType;
-    private boolean preferencial;
+    private boolean preferential;
 
-    public People(int id, String bloodType, boolean preferencial) {
+    public People(int id, String bloodType, boolean preferential, String name) {
         this.id = id;
         this.bloodType = bloodType;
-        this.preferencial = preferencial;
+        this.preferential = preferential;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -27,12 +37,12 @@ public class People {
         this.bloodType = bloodType;
     }
 
-    public boolean isPreferencial() {
-        return preferencial;
+    public boolean isPreferential() {
+        return preferential;
     }
 
-    public void setPreferencial(boolean preferencial) {
-        this.preferencial = preferencial;
+    public void setPreferential(boolean preferential) {
+        this.preferential = preferential;
     }
 
 }
