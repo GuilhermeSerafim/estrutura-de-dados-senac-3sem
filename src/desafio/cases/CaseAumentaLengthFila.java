@@ -1,6 +1,8 @@
-package desafio;
+package desafio.cases;
 
 import java.util.Scanner;
+
+import desafio.Fila;
 
 public class CaseAumentaLengthFila {
     public static void main(String[] args) {

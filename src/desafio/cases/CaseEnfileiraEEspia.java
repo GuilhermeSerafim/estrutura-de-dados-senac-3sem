@@ -1,4 +1,6 @@
-package desafio;
+package desafio.cases;
+
+import desafio.Fila;
 
 public class CaseEnfileiraEEspia {
     public static void main(String[] args) {
