@@ -1,27 +1,23 @@
 package aula05;
 
 public class ListaEncadeada<T> {
-    private NO inicio;
-    private NO fim;
+    private NO<T> inicio;
+    private NO<T> fim;
     private int tamanho;
 
-    public ListaEncadeada() {
-        tamanho = 0;
-    }
-
-    public NO getInicio() {
+    public NO<T> getInicio() {
         return inicio;
     }
 
-    public void setInicio(NO inicio) {
+    public void setInicio(NO<T> inicio) {
         this.inicio = inicio;
     }
 
-    public NO getFim() {
+    public NO<T> getFim() {
         return fim;
     }
 
-    public void setFim(NO fim) {
+    public void setFim(NO<T> fim) {
         this.fim = fim;
     }
 
@@ -50,11 +46,11 @@ public class ListaEncadeada<T> {
         this.tamanho++;
     }
 
-    public NO get(int posicao) {
+    public NO<T> get(int posicao) {
         if (posicao < 0 || posicao > tamanho) {
             return null;
         }
-        NO atual = this.inicio;
+        NO<T> atual = this.inicio;
         for (int i = 0; i < posicao; i++) {
             if (atual.getProximo() != null) {
                 atual = atual.getProximo();
@@ -64,9 +60,9 @@ public class ListaEncadeada<T> {
     }
 
     public int buscar(T elemento) {
-        NO atual = this.inicio;
+        NO<T> atual = this.inicio;
         for (int i = 0; i < this.getTamanho(); i++) {
-            if(atual.getElemento().equals(elemento)) {
+            if (atual.getElemento().equals(elemento)) {
                 return i;
             }
             atual = atual.getProximo();
@@ -75,8 +71,8 @@ public class ListaEncadeada<T> {
     }
 
     public void remover(T elemento) {
-        NO anterior = null;
-        NO atual = this.inicio;
+        NO<T> anterior = null;
+        NO<T> atual = this.inicio;
 
         for (int i = 0; i < getTamanho(); i++) {
             if (atual.getElemento().equals(elemento)) {
