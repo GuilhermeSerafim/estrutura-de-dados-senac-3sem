@@ -6,7 +6,6 @@ public class Main {
         l.adiciona("Isabella");
         l.adiciona("Guilherme");
         l.adiciona("Aurora");
-        l.remover("Isabella");
-        System.out.println(l);
+        System.out.println(l.buscar("Guilherme"));
     }
 }

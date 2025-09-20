@@ -63,6 +63,17 @@ public class ListaEncadeada<T> {
         return atual;
     }
 
+    public int buscar(T elemento) {
+        NO atual = this.inicio;
+        for (int i = 0; i < this.getTamanho(); i++) {
+            if(atual.getElemento().equals(elemento)) {
+                return i;
+            }
+            atual = atual.getProximo();
+        }
+        return -1;
+    }
+
     public void remover(T elemento) {
         NO anterior = null;
         NO atual = this.inicio;
@@ -81,9 +92,9 @@ public class ListaEncadeada<T> {
                 } else {
                     anterior.setProximo(atual.getProximo());
                 }
-                    atual = null;
-                    this.tamanho--;
-                    break;
+                atual = null;
+                this.tamanho--;
+                break;
             }
             anterior = atual;
             atual = atual.getProximo();
