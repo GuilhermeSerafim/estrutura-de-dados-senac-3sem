@@ -1,43 +1,84 @@
 package challenge;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Control the queue of a blood collection laboratory
+// Guilherme Serafim - 3ºNA Senac
+
 public class App {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int id = 1000;
-        // System.out.println("Enter the number of people in the queue: ");
-        // int nrPeople = in.nextInt();
-        // in.nextLine();
+        BloodCollectionQueue queue = new BloodCollectionQueue(16);
+        int nextTicket = 1000;
 
-        // BloodCollectionQueue peoplesInQueue = new BloodCollectionQueue(nrPeople);
-        BloodCollectionQueue peoplesInQueue = new BloodCollectionQueue();
-        // Input of people's
-        for (int i = 0; i < peoplesInQueue.getLength(); i++) {
-            System.out.printf("\nEnter the %dth person's blood type in the queue: ", i + 1);
-            String blood = in.nextLine();
-            System.out.printf("\nThe %dth person's is preferential? (yes / no) ", i + 1);
-            boolean preferential = in.nextLine().trim().toLowerCase().equals("yes") ? true : false;
-            System.out.printf("Enter the %dth person's name in the queue? ", i + 1);
-            String name = in.nextLine();
-            peoplesInQueue.add(new People(id++, blood, preferential, name));
-        }
-        in.close();
-
-        // List Queue with business rule
         while (true) {
-            // if return null break
-            People person = peoplesInQueue.dequeue();
-            if (person == null) {
-                System.out.println("Ninguém na fila, encerrando programa.");
-                return;
+            printMenu();
+            int option = readInt(in, "Escolha uma opção: ");
+
+            switch (option) {
+                case 1: {
+                    People p = new People(nextTicket++, false);
+                    queue.addNormal(p);
+                    System.out.println("Senha normal emitida: " + p);
+                    break;
+                }
+                case 2: {
+                    People p = new People(nextTicket++, true);
+                    queue.addPreferential(p);
+                    System.out.println("Senha preferencial emitida: " + p);
+                    break;
+                }
+                case 3: {
+                    System.out.println("Fila atual: " + queue);
+                    break;
+                }
+                case 4: {
+                    People next = queue.whoIsNext();
+                    if (next == null)
+                        System.out.println("Fila vazia.");
+                    else
+                        System.out.println("Próximo a ser chamado: " + next);
+                    break;
+                }
+                case 5: {
+                    People served = queue.callNext();
+                    if (served == null)
+                        System.out.println("Fila vazia.");
+                    else
+                        System.out.println("Chamando: " + served);
+                    break;
+                }
+                case 0: {
+                    System.out.println("Saindo...");
+                    in.close();
+                    return;
+                }
+                default:
+                    System.out.println("Opção inválida.");
             }
-            System.out.println("Password: " + person.getId());
-            System.out.println("Name: " + person.getName());
-            System.out.println("Blood type: " + person.getBloodType());
-            System.out.println("Preferential? " + person.isPreferential());
+            System.out.println();
         }
-        
+    }
+
+    private static void printMenu() {
+        System.out.println("==== Laboratório de Coleta de Sangue ====");
+        System.out.println("1 - Solicitar Senha (Normal)");
+        System.out.println("2 - Solicitar Senha (Preferencial)");
+        System.out.println("3 - Listar todas as senhas");
+        System.out.println("4 - Espiar a Lista (próximo a ser chamado)");
+        System.out.println("5 - Chamar elemento da fila (remover)");
+        System.out.println("0 - Sair");
+    }
+
+    private static int readInt(Scanner in, String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            try {
+                return in.nextInt();
+            } catch (InputMismatchException e) {
+                in.next(); // discard invalid token
+                System.out.println("Digite um número válido.");
+            }
+        }
     }
 }

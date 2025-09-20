@@ -1,48 +1,81 @@
 package challenge;
 
-// FIFO - First In First Out
-public class BloodCollectionQueue extends CustomQueue<People> {
-    private int countPreferential;
+public class BloodCollectionQueue extends StaticStructure<People> {
+    private int servedPreferentialInRow = 0;
 
-    public BloodCollectionQueue() {
+    public BloodCollectionQueue() { super(); }
+    public BloodCollectionQueue(int capacity) { super(capacity); }
+
+    public void addNormal(People person) {
+        if (person == null || person.isPreferential()) {
+            throw new IllegalArgumentException("Expected a normal person");
+        }
+        add(person);
     }
 
-    public BloodCollectionQueue(int capacity) {
-        super(capacity);
+    public void addPreferential(People person) {
+        if (person == null || !person.isPreferential()) {
+            throw new IllegalArgumentException("Expected a preferential person");
+        }
+        int lastPrefIndex = -1;
+        for (int i = 0; i < count; i++) {
+            People p = (People) elements[i];
+            if (p.isPreferential()) lastPrefIndex = i;
+        }
+        int insertPos = lastPrefIndex + 1;
+        insert(insertPos, person);
     }
 
-    public int getCountPreferential() {
-        return countPreferential;
-    }
+    public People whoIsNext() {
+        if (isEmpty()) return null;
 
-    // Resolution of the challenge
-    @Override
-    public People dequeue() {
-        if (this.isEmpty())
-            return null;
-        final int FRONT_POSITION = 0;
-        People frontPerson = this.elements[FRONT_POSITION];
-        if (countPreferential == 3) {
-            // Case 1 - Zere o contador e no lugar dessa pessoa preferencial vai passar uma normal | Case um pouco mais complexo:
-            // Aqui vou ter que fazer uma especie de lopping para verificação para identificação de uma pessoa normal
-            // Caso não haja pessoa normal, a pessoa atual e preferencial passará na fila
-            int indexUntilNormalPerson = FRONT_POSITION + 1;
-            while(true) {
-                People nextPerson = this.elements[indexUntilNormalPerson];
-                if(!nextPerson.isPreferential()) {
-                    this.remove(indexUntilNormalPerson);
-                    return nextPerson;
-                } else indexUntilNormalPerson++;
+        if (servedPreferentialInRow >= 3) {
+            int normalIndex = indexOfFirstNormal();
+            if (normalIndex != -1) {
+                return (People) elements[normalIndex];
             }
         }
-        //  Case 2 - Se caso for preferencial, chame ela primeiro, e incremente o contador | Ou Seja, é somente para incrementar o preferencial
-        if (frontPerson.isPreferential()) {
-            countPreferential++;
-            this.remove(FRONT_POSITION);
-            return frontPerson;
+        return (People) elements[0];
+    }
+
+    public People callNext() {
+        if (isEmpty()) return null;
+
+        int removeIndex = 0;
+        if (servedPreferentialInRow >= 3) {
+            int normalIndex = indexOfFirstNormal();
+            if (normalIndex != -1) {
+                removeIndex = normalIndex;
+                servedPreferentialInRow = 0;
+            }
         }
-        // Case 3 - caso não esteja ninguem na fila preferencial com o contador prerencial < 3, vai chamar o user commom
-        this.remove(FRONT_POSITION);
-        return frontPerson;
+
+        People served = removeAt(removeIndex);
+        if (served.isPreferential()) {
+            servedPreferentialInRow++;
+        } else {
+            servedPreferentialInRow = 0;
+        }
+        return served;
+    }
+
+    private int indexOfFirstNormal() {
+        for (int i = 0; i < count; i++) {
+            People p = (People) elements[i];
+            if (!p.isPreferential()) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public String toString() {
+        if (isEmpty()) return "[]";
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < count; i++) {
+            sb.append(((People) elements[i]).toString());
+            if (i < count - 1) sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }

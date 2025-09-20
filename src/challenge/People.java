@@ -1,48 +1,24 @@
 package challenge;
 
 public class People {
-    private int id;
-    private String name;
-    private String bloodType;
-    private boolean preferential;
+    private final int ticket;
+    private final boolean preferential;
 
-    public People(int id, String bloodType, boolean preferential, String name) {
-        this.id = id;
-        this.bloodType = bloodType;
+    public People(int ticket, boolean preferential) {
+        this.ticket = ticket;
         this.preferential = preferential;
-        this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getBloodType() {
-        return bloodType;
-    }
-
-    public void setBloodType(String bloodType) {
-        this.bloodType = bloodType;
+    public int getTicket() {
+        return ticket;
     }
 
     public boolean isPreferential() {
         return preferential;
     }
 
-    public void setPreferential(boolean preferential) {
-        this.preferential = preferential;
+    @Override
+    public String toString() {
+        return String.format("#%d%s", ticket, preferential ? " (P)" : " (N)");
     }
-
 }
