@@ -3,7 +3,6 @@ package challenge;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Guilherme Serafim - 3ºNA Senac
 
 public class App {
     public static void main(String[] args) {
@@ -13,61 +12,61 @@ public class App {
 
         while (true) {
             printMenu();
-            int option = readInt(in, "Escolha uma opção: ");
+            int option = readInt(in, "Choose an option: ");
 
             switch (option) {
                 case 1: {
                     People p = new People(nextTicket++, false);
                     queue.addNormal(p);
-                    System.out.println("Senha normal emitida: " + p);
+                    System.out.println("Normal ticket issued: " + p);
                     break;
                 }
                 case 2: {
                     People p = new People(nextTicket++, true);
                     queue.addPreferential(p);
-                    System.out.println("Senha preferencial emitida: " + p);
+                    System.out.println("Preferential ticket issued: " + p);
                     break;
                 }
                 case 3: {
-                    System.out.println("Fila atual: " + queue);
+                    System.out.println("Current queue: " + queue);
                     break;
                 }
                 case 4: {
                     People next = queue.whoIsNext();
                     if (next == null)
-                        System.out.println("Fila vazia.");
+                        System.out.println("Queue is empty.");
                     else
-                        System.out.println("Próximo a ser chamado: " + next);
+                        System.out.println("Next to be called: " + next);
                     break;
                 }
                 case 5: {
                     People served = queue.callNext();
                     if (served == null)
-                        System.out.println("Fila vazia.");
+                        System.out.println("Queue is empty.");
                     else
-                        System.out.println("Chamando: " + served);
+                        System.out.println("Calling: " + served);
                     break;
                 }
                 case 0: {
-                    System.out.println("Saindo...");
+                    System.out.println("Exiting...");
                     in.close();
                     return;
                 }
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("Invalid option.");
             }
             System.out.println();
         }
     }
 
     private static void printMenu() {
-        System.out.println("==== Laboratório de Coleta de Sangue ====");
-        System.out.println("1 - Solicitar Senha (Normal)");
-        System.out.println("2 - Solicitar Senha (Preferencial)");
-        System.out.println("3 - Listar todas as senhas");
-        System.out.println("4 - Espiar a Lista (próximo a ser chamado)");
-        System.out.println("5 - Chamar elemento da fila (remover)");
-        System.out.println("0 - Sair");
+        System.out.println("==== Blood Collection Laboratory ====");
+        System.out.println("1 - Request Ticket (Normal)");
+        System.out.println("2 - Request Ticket (Preferential)");
+        System.out.println("3 - List all tickets");
+        System.out.println("4 - Peek Queue (next to be called)");
+        System.out.println("5 - Call element from the queue (remove)");
+        System.out.println("0 - Exit");
     }
 
     private static int readInt(Scanner in, String prompt) {
@@ -77,7 +76,7 @@ public class App {
                 return in.nextInt();
             } catch (InputMismatchException e) {
                 in.next(); // discard invalid token
-                System.out.println("Digite um número válido.");
+                System.out.println("Enter a valid number.");
             }
         }
     }
