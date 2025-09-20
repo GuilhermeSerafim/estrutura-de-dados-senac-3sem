@@ -51,6 +51,9 @@ public class ListaEncadeada<T> {
     }
 
     public NO get(int posicao) {
+        if (posicao < 0 || posicao > tamanho) {
+            return null;
+        }
         NO atual = this.inicio;
         for (int i = 0; i < posicao; i++) {
             if (atual.getProximo() != null) {

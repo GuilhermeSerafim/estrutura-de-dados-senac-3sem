@@ -6,7 +6,7 @@ public class Main {
         l.adiciona("Isabela");
         l.adiciona("Guilherme");
         l.adiciona("Aurora");
-        NO n = l.get(2);
+        NO n = l.get(8);
         System.out.println(n);
     }
 }
