@@ -32,8 +32,6 @@ public class No<T> {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("No [elemento=").append(elemento).append(", proximo=").append(proximo).append("]");
-        return builder.toString();
+        return "No{" + "elemento=" + elemento + ", proximo=" + proximo + '}';
     }
 }

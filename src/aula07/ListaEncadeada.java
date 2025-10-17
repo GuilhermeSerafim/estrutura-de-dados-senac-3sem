@@ -18,7 +18,7 @@ public class ListaEncadeada<T> {
 
     @Override
     public String toString() {
-        return "ListaEncadeada [inicio=" + inicio + ", tamanho=" + tamanho + ", ultimo=" + ultimo + "]";
+        return "ListaEncadeada [inicio=" + inicio +"]";
     }
 
     public int getTamanho() {
