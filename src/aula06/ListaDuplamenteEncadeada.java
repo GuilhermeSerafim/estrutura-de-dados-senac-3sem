@@ -38,4 +38,14 @@ public class ListaDuplamenteEncadeada {
         System.out.println("NULL\n");
     }
 
+    public int tamanhoLista() throws Exception {
+        NoDuplo aux = inicio;
+        int tamanho = 0;
+        while (aux != null) {
+            tamanho++;
+            System.out.println(aux.dado + " -> ");
+            aux = aux.proximo;
+        }
+        return tamanho;
+    }
 }
