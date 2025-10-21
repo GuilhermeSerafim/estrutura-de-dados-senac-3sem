@@ -31,7 +31,7 @@ public class ListaEncadeada<T> {
 
     @Override
     public String toString() {
-        return "ListaEncadeada [inicio=" + inicio + ", fim=" + fim + ", tamanho=" + tamanho + "]";
+        return "ListaEncadeada [inicio=" + inicio +"]";
     }
 
     public void adiciona(T elemento) {
@@ -70,12 +70,14 @@ public class ListaEncadeada<T> {
         return -1;
     }
 
+    // Quando removemos, precisamos mudar a referencia do nó atual e o próximo deste nó, deixar ele null
     public void remover(T elemento) {
         NO<T> anterior = null;
         NO<T> atual = this.inicio;
 
         for (int i = 0; i < getTamanho(); i++) {
             if (atual.getElemento().equals(elemento)) {
+                // Apenas um elemento
                 if (this.tamanho == 1) {
                     this.inicio = null;
                     this.fim = null;
