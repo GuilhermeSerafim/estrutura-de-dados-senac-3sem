@@ -28,4 +28,14 @@ public class ListaDuplamenteEncadeada {
         this.fim = fim;
     }
 
+    public void exibir() throws Exception {
+        System.out.println("Lista -> ");
+        NoDuplo aux = inicio;
+        while (aux != null) {
+            System.out.println(aux.dado + " -> ");
+            aux = aux.proximo;
+        }
+        System.out.println("NULL\n");
+    }
+
 }
