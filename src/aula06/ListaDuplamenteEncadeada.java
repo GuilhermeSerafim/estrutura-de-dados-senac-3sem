@@ -48,4 +48,29 @@ public class ListaDuplamenteEncadeada {
         }
         return tamanho;
     }
+
+    public void adicionar(String s) throws Exception {
+        NoDuplo novoElemento = new NoDuplo(s);
+
+        if (inicio == null) { // Lista está vazia
+            novoElemento.proximo = null;
+            novoElemento.anterior = null;
+            inicio = novoElemento;
+            fim = novoElemento;
+        } else { // Lista NÃO está vazia (aqui é a mágica do O(1))
+
+            // 1. O 'proximo' do novo elemento é null (ele é o último)
+            novoElemento.proximo = null;
+
+            // 2. O 'anterior' do novo elemento aponta para o antigo 'fim'
+            novoElemento.anterior = this.fim;
+
+            // 3. O 'proximo' do antigo 'fim' aponta para o novo elemento
+            this.fim.proximo = novoElemento;
+
+            // 4. Atualiza a referência 'fim' para o novo elemento
+            this.fim = novoElemento;
+        }
+    }
+
 }
