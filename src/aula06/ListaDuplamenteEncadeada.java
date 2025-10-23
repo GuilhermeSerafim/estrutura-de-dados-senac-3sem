@@ -139,4 +139,37 @@ public class ListaDuplamenteEncadeada {
         }
     }
 
+    // Revisar
+    public String removeElementoComIndex(int i) throws Exception {
+        NoDuplo aux = inicio;
+        NoDuplo lixo = null;
+
+        if (i < 0 || i > tamanhoLista())
+            throw new Exception("Indice inválido");
+
+        if (tamanhoLista() == 0)
+            throw new Exception("A lista está vazia");
+
+        if (i == 0) {
+            lixo = aux;
+            aux = aux.proximo;
+            inicio = aux;
+        } else {
+            int contador = 0;
+            while (contador < i) {
+                aux = aux.proximo;
+                contador++;
+            }
+
+            lixo = aux;
+            aux.anterior.proximo = aux.proximo;
+            if (aux != fim)
+                aux.proximo.anterior = aux.anterior;
+            else {
+                fim = aux;
+            }
+
+        }
+        return lixo.dado;
+    }
 }
