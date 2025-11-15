@@ -2,6 +2,8 @@ package aula07;
 
 import java.util.ArrayList;
 
+// Vertice = Nó
+// Aresta = Ligação entre os nós
 public class Grafo<T> {
     private ArrayList<Vertice<T>> vertices;
     private ArrayList<Aresta<T>> arestas;
@@ -9,6 +11,20 @@ public class Grafo<T> {
     public Grafo() {
         this.vertices = new ArrayList<Vertice<T>>();
         this.arestas = new ArrayList<Aresta<T>>();
+    }
+
+    public void adicionarVertice(T dado) {
+        Vertice<T> novoVertice = new Vertice<T>(dado);
+        this.vertices.add(novoVertice);
+    }
+
+    public void adicionarAresta(Double peso, T dadoInicio, T dadoFim) {
+        Vertice<T> inicio = this.getVertice(dadoInicio);
+        Vertice<T> fim = this.getVertice(dadoFim);
+        Aresta<T> aresta = new Aresta<T>(peso, inicio, fim);
+        inicio.adicionarArestaSaida(aresta);
+        fim.adicionarArestaEntrada(aresta);
+        this.arestas.add(aresta);
     }
 
     public Vertice<T> getVertice(T dado) {
@@ -21,20 +37,6 @@ public class Grafo<T> {
             }
         }
         return vertice;
-    }
-
-    public void adicionarVertice(T dado) {
-        Vertice<T> novoVertice = new Vertice<T>(dado);
-        this.vertices.add(novoVertice);
-    }
-
-    public void adicionarVertice(Double peso, T dadoInicio, T dadoFim) {
-        Vertice<T> inicio = this.getVertice(dadoInicio);
-        Vertice<T> fim = this.getVertice(dadoFim);
-        Aresta<T> aresta = new Aresta<T>(peso, inicio, fim);
-        inicio.adicionarArestaSaida(aresta);
-        fim.adicionarArestaEntrada(aresta);
-        this.arestas.add(aresta);
     }
 
 }
