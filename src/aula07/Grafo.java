@@ -14,6 +14,9 @@ public class Grafo<T> {
     }
 
     public void adicionarVertice(T dado) {
+        if(dado == null) {
+            throw new IllegalArgumentException("O dado do vértice não pode ser nulo.");
+        }
         Vertice<T> novoVertice = new Vertice<T>(dado);
         this.vertices.add(novoVertice);
     }
