@@ -34,6 +34,19 @@ public class Grafo<T> {
         fim.adicionarArestaEntrada(aresta);
         this.arestas.add(aresta);
     }
+    public void adicionarAresta(T dadoInicio, T dadoFim) {
+        Vertice<T> inicio = this.getVertice(dadoInicio);
+        Vertice<T> fim = this.getVertice(dadoFim);
+
+        if(inicio == null || fim == null) {
+            throw new IllegalArgumentException("Um dos vértices não existe no grafo.");
+        }
+
+        Aresta<T> aresta = new Aresta<T>(inicio, fim);
+        inicio.adicionarArestaSaida(aresta);
+        fim.adicionarArestaEntrada(aresta);
+        this.arestas.add(aresta);
+    }
 
     public Vertice<T> getVertice(T dado) {
         Vertice<T> vertice = null;
