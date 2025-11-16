@@ -14,7 +14,7 @@ public class Grafo<T> {
     }
 
     public void adicionarVertice(T dado) {
-        if(dado == null) {
+        if (dado == null) {
             throw new IllegalArgumentException("O dado do vértice não pode ser nulo.");
         }
         Vertice<T> novoVertice = new Vertice<T>(dado);
@@ -25,7 +25,7 @@ public class Grafo<T> {
         Vertice<T> inicio = this.getVertice(dadoInicio);
         Vertice<T> fim = this.getVertice(dadoFim);
 
-        if(inicio == null || fim == null) {
+        if (inicio == null || fim == null) {
             throw new IllegalArgumentException("Um dos vértices não existe no grafo.");
         }
 
@@ -34,11 +34,12 @@ public class Grafo<T> {
         fim.adicionarArestaEntrada(aresta);
         this.arestas.add(aresta);
     }
+
     public void adicionarAresta(T dadoInicio, T dadoFim) {
         Vertice<T> inicio = this.getVertice(dadoInicio);
         Vertice<T> fim = this.getVertice(dadoFim);
 
-        if(inicio == null || fim == null) {
+        if (inicio == null || fim == null) {
             throw new IllegalArgumentException("Um dos vértices não existe no grafo.");
         }
 
@@ -49,15 +50,12 @@ public class Grafo<T> {
     }
 
     public Vertice<T> getVertice(T dado) {
-        Vertice<T> vertice = null;
-        for (int i = 0; i < this.vertices.size(); i++) {
-            Vertice<T> verticeAtual = this.vertices.get(i);
-            if (verticeAtual.getDado().equals(dado)) {
-                vertice = verticeAtual;
-                break;
+        for (Vertice<T> v : this.vertices) {
+            if (v.getDado().equals(dado)) {
+                return v;
             }
         }
-        return vertice;
+        return null;
     }
 
 }
