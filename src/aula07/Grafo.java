@@ -72,7 +72,7 @@ public class Grafo<T> {
         marcados.add(atual);
         System.out.println(atual.getDado());
         fila.add(atual);
-        while(fila.size() > 0) {
+        while (fila.size() > 0) {
             Vertice<T> visitado = fila.get(0);
             // Percorre todas as arestas de saída do vértice visitado
             for (int i = 0; i < visitado.getArestasSaida().size(); i++) {
@@ -83,10 +83,23 @@ public class Grafo<T> {
                     System.out.println(proximo.getDado());
                     fila.add(proximo);
                 }
-                
+
             }
             // Remove o vértice visitado da fila
             fila.remove(0);
+        }
+    }
+
+    public void BuscaEmLarguraRecursiva(Vertice<T> atual, ArrayList<Vertice<T>> marcados) {
+        marcados.add(atual);
+        System.out.println(atual.getDado());
+
+        for (int i = 0; i < atual.getArestasSaida().size(); i++) {
+            Vertice<T> proximo = atual.getArestasSaida().get(i).getFim();
+
+            if (!marcados.contains(proximo)) {
+                BuscaEmLarguraRecursiva(proximo, marcados); // CHAMADA RECURSIVA → profundidade
+            }
         }
     }
 
