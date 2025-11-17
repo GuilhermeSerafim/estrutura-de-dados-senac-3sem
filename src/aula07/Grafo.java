@@ -65,10 +65,9 @@ public class Grafo<T> {
      * travessia ou busca em grafos que explora todos os vizinhos de um
      * vértice antes de avançar para os vértices de nível mais profundo.
      */
-    public void BuscaEmLargura() {
+    public void BuscaEmLargura(Vertice<T> atual) {
         ArrayList<Vertice<T>> marcados = new ArrayList<Vertice<T>>();
         ArrayList<Vertice<T>> fila = new ArrayList<Vertice<T>>();
-        Vertice<T> atual = this.vertices.get(0);
         marcados.add(atual);
         System.out.println(atual.getDado());
         fila.add(atual);
@@ -90,6 +89,11 @@ public class Grafo<T> {
         }
     }
 
+    /**
+     * Busca em profundidade (DFS - Depth-First Search) é um algoritmo de
+     * travessia ou busca em grafos que explora o máximo possível ao longo de
+     * cada ramificação antes de retroceder.
+     */
     public void dfs(Vertice<T> atual, ArrayList<Vertice<T>> marcados) {
         marcados.add(atual);
         System.out.println(atual.getDado());
