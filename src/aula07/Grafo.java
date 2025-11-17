@@ -90,7 +90,7 @@ public class Grafo<T> {
         }
     }
 
-    public void BuscaEmLarguraRecursiva(Vertice<T> atual, ArrayList<Vertice<T>> marcados) {
+    public void dfs(Vertice<T> atual, ArrayList<Vertice<T>> marcados) {
         marcados.add(atual);
         System.out.println(atual.getDado());
 
@@ -98,7 +98,7 @@ public class Grafo<T> {
             Vertice<T> proximo = atual.getArestasSaida().get(i).getFim();
 
             if (!marcados.contains(proximo)) {
-                BuscaEmLarguraRecursiva(proximo, marcados); // CHAMADA RECURSIVA → profundidade
+                dfs(proximo, marcados); // CHAMADA RECURSIVA → profundidade
             }
         }
     }
