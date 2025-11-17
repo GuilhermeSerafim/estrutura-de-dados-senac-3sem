@@ -58,6 +58,13 @@ public class Grafo<T> {
         return null;
     }
 
+    // Documente esse metodo
+
+    /**
+     * Busca em largura (BFS - Breadth-First Search) é um algoritmo de
+     * travessia ou busca em grafos que explora todos os vizinhos de um
+     * vértice antes de avançar para os vértices de nível mais profundo.
+     */
     public void BuscaEmLargura() {
         ArrayList<Vertice<T>> marcados = new ArrayList<Vertice<T>>();
         ArrayList<Vertice<T>> fila = new ArrayList<Vertice<T>>();
@@ -67,8 +74,10 @@ public class Grafo<T> {
         fila.add(atual);
         while(fila.size() > 0) {
             Vertice<T> visitado = fila.get(0);
+            // Percorre todas as arestas de saída do vértice visitado
             for (int i = 0; i < visitado.getArestasSaida().size(); i++) {
                 Vertice<T> proximo = visitado.getArestasSaida().get(i).getFim();
+                // Se o vértice ainda não foi marcado, marca e adiciona na fila
                 if (!marcados.contains(proximo)) {
                     marcados.add(proximo);
                     System.out.println(proximo.getDado());
@@ -76,6 +85,7 @@ public class Grafo<T> {
                 }
                 
             }
+            // Remove o vértice visitado da fila
             fila.remove(0);
         }
     }

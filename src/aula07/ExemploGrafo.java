@@ -10,11 +10,11 @@ public class ExemploGrafo {
         grafo.adicionarVertice("Claudio");
 
         grafo.adicionarAresta("Paulo", "Lorenzo");
-        grafo.adicionarAresta("Lorenzo", "Kleber");
-        grafo.adicionarAresta("Kleber", "Cleuza");
         grafo.adicionarAresta("Paulo", "Cleuza");
         grafo.adicionarAresta("Claudio", "Lorenzo");
         grafo.adicionarAresta("Claudio", "Paulo");
+        grafo.adicionarAresta("Lorenzo", "Kleber");
+        grafo.adicionarAresta("Kleber", "Cleuza");
 
         grafo.BuscaEmLargura();
     }
