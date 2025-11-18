@@ -13,5 +13,8 @@ public class ExemploArvore {
 
         System.out.println("Percurso em pré-ordem:");
         arvore.preOrder(arvore.root);
+
+        System.out.println("Percurso em ordem:");
+        arvore.inOrder(arvore.root);
     }
 }

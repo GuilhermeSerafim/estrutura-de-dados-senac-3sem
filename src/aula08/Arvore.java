@@ -33,4 +33,14 @@ public class Arvore {
             preOrder(place.right);
         }
     }
+
+    public void inOrder(No place) {
+        if(place.left != null) {
+            inOrder(place.left);
+        }
+        System.out.println(" " + place.info);
+        if(place.right != null) {
+            inOrder(place.right);
+        }
+    }
 }
