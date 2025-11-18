@@ -23,4 +23,14 @@ public class Arvore {
             }
         }
     }
+
+    public void preOrder(No place) {
+        System.out.println(" " + place.info);
+        if(place.left != null) {
+            preOrder(place.left);
+        }
+        if(place.right != null) {
+            preOrder(place.right);
+        }
+    }
 }
