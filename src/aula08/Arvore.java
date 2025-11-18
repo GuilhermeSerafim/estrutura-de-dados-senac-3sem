@@ -43,4 +43,14 @@ public class Arvore {
             inOrder(place.right);
         }
     }
+
+    public void postOrder(No place) {
+        if(place.left != null) {
+            postOrder(place.left);
+        }
+        if(place.right != null) {
+            postOrder(place.right);
+        }
+        System.out.println(" " + place.info);
+    }
 }

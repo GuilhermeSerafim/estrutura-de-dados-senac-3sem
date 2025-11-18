@@ -16,5 +16,9 @@ public class ExemploArvore {
 
         System.out.println("Percurso em ordem:");
         arvore.inOrder(arvore.root);
+
+        System.out.println("Percurso em pós-ordem:");
+        arvore.postOrder(arvore.root);
+        
     }
 }
