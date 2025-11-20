@@ -49,6 +49,16 @@ public class Grafo<T> {
         this.arestas.add(aresta);
     }
 
+    public void adicionaArestaBidirecional(T dadoInicio, T dadoFim, Double peso) {
+        this.adicionaAresta(dadoInicio, dadoFim, peso);
+        this.adicionaAresta(dadoFim, dadoInicio, peso);
+    }
+
+    public void adicionaArestaBidirecional(T dadoInicio, T dadoFim) {
+        this.adicionaAresta(dadoInicio, dadoFim);
+        this.adicionaAresta(dadoFim, dadoInicio);
+    }
+
     public Vertice<T> getVertice(T dado) {
         for (Vertice<T> v : this.vertices) {
             if (v.getDado().equals(dado)) {
@@ -57,8 +67,6 @@ public class Grafo<T> {
         }
         return null;
     }
-
-    // Documente esse metodo
 
     /**
      * Busca em largura (BFS - Breadth-First Search) é um algoritmo de

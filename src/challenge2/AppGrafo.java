@@ -1,10 +1,23 @@
 package challenge2;
 
+import java.util.Scanner;
+import java.util.StringJoiner;
+
+// Guilherme da Silva Serafim - ID: 1143043623
+// ADO 4 - Algoritmos de Grafos
 public class AppGrafo {
     public static void main(String[] args) {
         Grafo<String> grafo = new Grafo<>();
+        Scanner in = new Scanner(System.in);
         popularGrafo(grafo);
         imprimirGrafo(grafo);
+        System.out.println("Digite um ponto de partida: ");
+        String pontoPartida = in.nextLine();
+        System.out.println("Digite um ponto de chegada: ");
+        String pontoChegada = in.nextLine();
+        System.out.println("Calculando menor caminho de " + pontoPartida + " até " + pontoChegada + "...");
+        // Implementação do Dijkstra ficaria aqui
+        in.close();
     }
 
     public static void popularGrafo(Grafo<String> grafo) {
@@ -33,47 +46,52 @@ public class AppGrafo {
         grafo.adicionaVertice("W");
         grafo.adicionaVertice("X");
 
-        grafo.adicionaAresta("A", "B", 300.0);
-        grafo.adicionaAresta("A", "V", 370.0);
-        grafo.adicionaAresta("A", "X", 317.0);
+        grafo.adicionaArestaBidirecional("A", "B", 300.0);
+        grafo.adicionaArestaBidirecional("A", "V", 370.0);
+        grafo.adicionaArestaBidirecional("A", "X", 317.0);
 
         // Lado Direito (B até K)
-        grafo.adicionaAresta("B", "C", 47.0);
-        grafo.adicionaAresta("C", "D", 62.0);
-        grafo.adicionaAresta("C", "H", 141.0);
-        grafo.adicionaAresta("D", "E", 8.0);
-        grafo.adicionaAresta("E", "F", 13.0);
-        grafo.adicionaAresta("E", "G", 230.0);
-        grafo.adicionaAresta("H", "I", 138.0);
-        grafo.adicionaAresta("I", "J", 153.0);
-        grafo.adicionaAresta("J", "K", 512.0);
+        grafo.adicionaArestaBidirecional("B", "C", 47.0);
+        grafo.adicionaArestaBidirecional("C", "D", 62.0);
+        grafo.adicionaArestaBidirecional("C", "H", 141.0);
+        grafo.adicionaArestaBidirecional("D", "E", 8.0);
+        grafo.adicionaArestaBidirecional("E", "F", 13.0);
+        grafo.adicionaArestaBidirecional("E", "G", 230.0);
+        grafo.adicionaArestaBidirecional("H", "I", 138.0);
+        grafo.adicionaArestaBidirecional("I", "J", 153.0);
+        grafo.adicionaArestaBidirecional("J", "K", 512.0);
 
         // Parte Inferior e Esquerda (K até Q)
-        grafo.adicionaAresta("K", "L", 135.0);
-        grafo.adicionaAresta("L", "M", 15.0); // Distância não visível no mapa (mensurei)
-        grafo.adicionaAresta("L", "N", 187.0);
-        grafo.adicionaAresta("N", "O", 108.0);
-        grafo.adicionaAresta("O", "P", 82.0);
-        grafo.adicionaAresta("P", "Q", 215.0);
+        grafo.adicionaArestaBidirecional("K", "L", 135.0);
+        grafo.adicionaArestaBidirecional("L", "M", 15.0); // Distância não visível no mapa (mensurei)
+        grafo.adicionaArestaBidirecional("L", "N", 187.0);
+        grafo.adicionaArestaBidirecional("N", "O", 108.0);
+        grafo.adicionaArestaBidirecional("O", "P", 82.0);
+        grafo.adicionaArestaBidirecional("P", "Q", 215.0);
 
         // Parte Superior Esquerda e Centro (Q até U/V)
-        grafo.adicionaAresta("Q", "R", 97.0);
-        grafo.adicionaAresta("R", "S", 33.0);
-        grafo.adicionaAresta("R", "T", 243.0);
-        grafo.adicionaAresta("S", "T", 207.0);
-        grafo.adicionaAresta("S", "V", 38.0);
-        grafo.adicionaAresta("T", "U", 22.0);
-        grafo.adicionaAresta("U", "V", 210.0);
-        grafo.adicionaAresta("U", "X", 107.0);
+        grafo.adicionaArestaBidirecional("Q", "R", 97.0);
+        grafo.adicionaArestaBidirecional("R", "S", 33.0);
+        grafo.adicionaArestaBidirecional("R", "T", 243.0);
+        grafo.adicionaArestaBidirecional("S", "T", 207.0);
+        grafo.adicionaArestaBidirecional("S", "V", 38.0);
+        grafo.adicionaArestaBidirecional("T", "U", 22.0);
+        grafo.adicionaArestaBidirecional("U", "V", 210.0);
+        grafo.adicionaArestaBidirecional("U", "X", 107.0);
     }
 
     public static void imprimirGrafo(Grafo<String> grafo) {
+        System.out.println("Localizações e distancias respectivas:");
         for (Vertice<String> vertice : grafo.getVertices()) {
-            System.out.print("Vértice " + vertice.getDado() + " conectado a: ");
+            System.out.print(vertice.getDado() + " até: ");
+
+            StringJoiner joiner = new StringJoiner(", ");
+
             for (Aresta<String> aresta : vertice.getArestasSaida()) {
-                System.out.print(aresta.getFim().getDado() + " (" + aresta.getPeso().intValue() + " Metros" + "), ");
+                joiner.add(aresta.getFim().getDado() + " (" + aresta.getPeso().intValue() + " Metros)");
             }
-            System.out.println();
+
+            System.out.println(joiner.toString());
         }
     }
 }
