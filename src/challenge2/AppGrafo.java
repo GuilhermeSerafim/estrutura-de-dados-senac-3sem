@@ -3,7 +3,7 @@ package challenge2;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
-// Guilherme da Silva Serafim - ID: 1143043623
+// Guilherme da Silva Serafim - ID: 1143043623 - 3ªTADS Noite
 // ADO 4 - Algoritmos de Grafos
 public class AppGrafo {
     public static void main(String[] args) {
