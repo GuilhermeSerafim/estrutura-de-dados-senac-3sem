@@ -2,8 +2,6 @@ package challenge2;
 
 import java.util.ArrayList;
 
-// Vertice = Nó
-// Aresta = Ligação entre os nós
 public class Grafo<T> {
     private ArrayList<Vertice<T>> vertices;
     private ArrayList<Aresta<T>> arestas;

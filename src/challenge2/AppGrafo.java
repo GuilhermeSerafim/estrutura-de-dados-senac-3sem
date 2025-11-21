@@ -3,7 +3,7 @@ package challenge2;
 import java.util.*;
 
 // Guilherme da Silva Serafim - ID: 1143043623 - 3ªTADS Noite
-// ADO 4 - Algoritmos de Grafos
+// ADO 4 - Estrutura de Dados - Desafio 2 - Grafos
 public class AppGrafo {
     public static void main(String[] args) {
         Grafo<String> grafo = new Grafo<>();
