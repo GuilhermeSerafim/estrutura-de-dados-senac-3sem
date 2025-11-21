@@ -96,6 +96,14 @@ public class AppGrafo {
         }
     }
 
+    /**
+     * Implementa o Algoritmo de Dijkstra para encontrar o caminho mais curto entre dois vértices.
+     * * @param grafo O grafo contendo os vértices e arestas.
+     * @param inicio O identificador (nome) do vértice de partida.
+     * @param fim O identificador (nome) do vértice de destino.
+     * @return Uma lista ordenada com os nomes dos vértices que compõem o caminho (ex: [A, B, C]), 
+     * ou null caso não exista caminho.
+     */
     public static List<String> calcularMenorCaminho(Grafo<String> grafo, String inicio, String fim) {
         Vertice<String> origem = grafo.getVertice(inicio);
         Vertice<String> destino = grafo.getVertice(fim);
@@ -154,6 +162,14 @@ public class AppGrafo {
     }
 
 
+    /**
+     * Encontra e exibe até duas opções de rota entre dois pontos.
+     * Utiliza uma heurística de penalidade de peso para forçar a descoberta de um caminho alternativo
+     * sem desconectar o grafo.
+     * * @param grafo O grafo a ser percorrido.
+     * @param inicio Ponto de partida.
+     * @param fim Ponto de chegada.
+     */
     public static void buscarDuasOpcoes(Grafo<String> grafo, String inicio, String fim) {
         System.out.println("\n=== OPÇÃO 1 (Melhor Caminho) ===");
         List<String> caminho1 = calcularMenorCaminho(grafo, inicio, fim);
@@ -163,24 +179,20 @@ public class AppGrafo {
             return;
         }
 
-        // --- APLICANDO PENALIDADE (Simulando trânsito no caminho 1) ---
         List<Aresta<String>> arestasAlteradas = new ArrayList<>();
 
-        // Percorre o caminho encontrado e aumenta o peso das ruas usadas
         for (int i = 0; i < caminho1.size() - 1; i++) {
             String origem = caminho1.get(i);
             String destino = caminho1.get(i + 1);
             
-            // Penaliza ida
             Vertice<String> vOrigem = grafo.getVertice(origem);
             for (Aresta<String> aresta : vOrigem.getArestasSaida()) {
                 if (aresta.getFim().getDado().equals(destino)) {
-                    aresta.setPeso(aresta.getPeso() * 10.0); // Aumenta muito o peso
+                    aresta.setPeso(aresta.getPeso() * 10.0);
                     arestasAlteradas.add(aresta);
                 }
             }
             
-            // Penaliza volta (bidirecional)
             Vertice<String> vDestino = grafo.getVertice(destino);
             for (Aresta<String> aresta : vDestino.getArestasSaida()) {
                 if (aresta.getFim().getDado().equals(origem)) {
@@ -197,7 +209,6 @@ public class AppGrafo {
             System.out.println("Não existe uma segunda opção viável.");
         }
 
-        // --- RESTAURAR O GRAFO (Para não estragar futuras consultas) ---
         for (Aresta<String> aresta : arestasAlteradas) {
             aresta.setPeso(aresta.getPeso() / 10.0);
         }
