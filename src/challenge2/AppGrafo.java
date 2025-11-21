@@ -10,11 +10,11 @@ public class AppGrafo {
         Scanner in = new Scanner(System.in);
         popularGrafo(grafo);
         imprimirGrafo(grafo);
-        // System.out.println("Digite um ponto de partida: ");
-        // String pontoPartida = in.nextLine();
-        // System.out.println("Digite um ponto de chegada: ");
-        // String pontoChegada = in.nextLine();
-
+        System.out.print("Digite um ponto de partida  (Ex: A): ");
+        String pontoPartida = in.nextLine();
+        System.out.print("Digite um ponto de chegada (Ex: B): ");
+        String pontoChegada = in.nextLine();
+        calcularMenorCaminho(grafo, pontoPartida, pontoChegada);
         in.close();
     }
 
@@ -93,7 +93,7 @@ public class AppGrafo {
         }
     }
 
-    public void calcularMenorCaminho(Grafo<String> grafo, String inicio, String fim) {
+    public static void calcularMenorCaminho(Grafo<String> grafo, String inicio, String fim) {
         Vertice<String> origem = grafo.getVertice(inicio);
         Vertice<String> destino = grafo.getVertice(fim);
 
