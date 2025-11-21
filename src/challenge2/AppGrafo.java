@@ -1,7 +1,6 @@
 package challenge2;
 
-import java.util.Scanner;
-import java.util.StringJoiner;
+import java.util.*;
 
 // Guilherme da Silva Serafim - ID: 1143043623 - 3ªTADS Noite
 // ADO 4 - Algoritmos de Grafos
@@ -11,12 +10,11 @@ public class AppGrafo {
         Scanner in = new Scanner(System.in);
         popularGrafo(grafo);
         imprimirGrafo(grafo);
-        System.out.println("Digite um ponto de partida: ");
-        String pontoPartida = in.nextLine();
-        System.out.println("Digite um ponto de chegada: ");
-        String pontoChegada = in.nextLine();
-        System.out.println("Calculando menor caminho de " + pontoPartida + " até " + pontoChegada + "...");
-        // Implementação do Dijkstra ficaria aqui
+        // System.out.println("Digite um ponto de partida: ");
+        // String pontoPartida = in.nextLine();
+        // System.out.println("Digite um ponto de chegada: ");
+        // String pontoChegada = in.nextLine();
+
         in.close();
     }
 
@@ -63,7 +61,7 @@ public class AppGrafo {
 
         // Parte Inferior e Esquerda (K até Q)
         grafo.adicionaArestaBidirecional("K", "L", 135.0);
-        grafo.adicionaArestaBidirecional("L", "M", 15.0); // Distância não visível no mapa (mensurei)
+        grafo.adicionaArestaBidirecional("L", "M", 50.0);
         grafo.adicionaArestaBidirecional("L", "N", 187.0);
         grafo.adicionaArestaBidirecional("N", "O", 108.0);
         grafo.adicionaArestaBidirecional("O", "P", 82.0);
@@ -94,4 +92,78 @@ public class AppGrafo {
             System.out.println(joiner.toString());
         }
     }
+
+    public void calcularMenorCaminho(Grafo<String> grafo, String inicio, String fim) {
+        Vertice<String> origem = grafo.getVertice(inicio);
+        Vertice<String> destino = grafo.getVertice(fim);
+
+        if (origem == null || destino == null) {
+            System.out.println("Um dos pontos informados não existe no grafo.");
+            return;
+        }
+
+        // Guarda a menor distância encontrada até cada ponto
+        Map<Vertice<String>, Double> distancias = new HashMap<>();
+
+        // O "Rastreador": Guarda quem veio antes (para montar a rota no final)
+        Map<Vertice<String>, Vertice<String>> predecessores = new HashMap<>();
+
+        // Comportamento do PriorityQueue: o elemento com maior prioridade sai primeiro,
+        // não importa quando ele chegou.
+        // Aqui definimos a prioridade como sendo a menor distância.
+        PriorityQueue<Vertice<String>> filaPrioridade = new PriorityQueue<>(
+                (v1, v2) -> distancias.get(v1).compareTo(distancias.get(v2)));
+
+        // Como ainda não visitamos ninguém, não sabemos a distância real.
+        // Então, usamos o "Infinito" como um placeholder que significa "Desconhecido"
+        // ou "Inalcançável por enquanto".
+        for (Vertice<String> v : grafo.getVertices()) {
+            distancias.put(v, Double.MAX_VALUE); // Inicialmente, todas as distâncias são infinitas
+        }
+
+        distancias.put(origem, 0.0); // Distância até o ponto de partida é 0
+        filaPrioridade.add(origem);
+
+        // O Loop Principal (Enquanto houver lugares para visitar)
+        while (!filaPrioridade.isEmpty()) {
+            Vertice<String> atual = filaPrioridade.poll();
+
+            // Se chegamos ao destino, podemos parar (otimização)
+            if (atual.equals(destino))
+                break;
+
+            for (Aresta<String> aresta : atual.getArestasSaida()) {
+                Vertice<String> vizinho = aresta.getFim();
+                Double novaDistancia = distancias.get(atual) + aresta.getPeso();
+                // RELAXAMENTO: Se achamos um caminho mais curto, atualizamos
+                if (novaDistancia < distancias.get(vizinho)) {
+                    distancias.put(vizinho, novaDistancia);
+                    predecessores.put(vizinho, atual);
+
+                    // Remove e readiciona para ATUALIZAAAR a prioridade na fila
+                    filaPrioridade.remove(vizinho);
+                    filaPrioridade.add(vizinho);
+                }
+            }
+        }
+
+        // Reconstrução do Caminho
+        List<String> caminho = new LinkedList<>();
+        Vertice<String> passo = destino;
+
+        if(distancias.get(destino) == Double.MAX_VALUE) {
+            System.out.println("Não há caminho disponível de " + inicio + " até " + fim + ".");
+            return;
+        }
+
+        while (passo != null) {
+            caminho.add(0, passo.getDado()); // Adiciona no começo para inverter a ordem
+            passo = predecessores.get(passo);
+        }
+
+        System.out.println("======== Resultado: ========");
+        System.out.println("Menor caminho de " + inicio + " até " + fim + ": " + String.join(" -> ", caminho));
+        System.out.println("Distância total: " + distancias.get(destino).intValue() + " Metros");
+    }
+
 }
